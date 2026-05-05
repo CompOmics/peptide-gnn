@@ -1,0 +1,45 @@
+[project]
+authors = [
+    { name = "Kateřina Hrůzová" },
+    { name = "CompOmics" }
+]
+name = "peptide-gnn"
+description = "Graph Neural Network for peptide LC RT predictions."
+readme = "README.md"
+dynamic = ["version"]
+requires-python = ">=3.10"
+dependencies = [
+    "molgraph==0.10.1",
+    "tensorflow[and-cuda]>=2.16,<2.21",
+    "psm-utils>=1.5",
+    "click==8.3",
+    "rich==14.3",
+    "matplotlib==3.10",
+    "jupyter==1.1",
+    "seaborn==0.13.2"
+]
+
+[project.scripts]
+pepgnn = "peptide_gnn.cli:cli"
+
+[project.optional-dependencies]
+gpu = [
+    "tensorflow[and-cuda]>=2.16,<2.21",
+    "nvidia-cudnn-cu12>=8.9",
+    "nvidia-cublas-cu12>=12.3",
+    "nvidia-cuda-runtime-cu12>=12.3",
+    "nvidia-cuda-nvrtc-cu12>=12.3"
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "peptide_gnn.__version__" }
+
+[project.urls]
+Homepage = "https://github.com/compomics/peptide-gnn"
+
+[tool.setuptools.packages.find]
+include = ["peptide_gnn*"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
