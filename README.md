@@ -11,7 +11,9 @@ A GNN-RNN hybrid model for predicting and explaining peptide LC-RT data.
 ## Run it yourself
 
 > [!NOTE]
-> Results may differ from the paper due to the stochastic nature of neural nets.
+> Results may very slightly differ from the paper due to the stochastic nature of neural nets.
+
+Installation should take less than 30 minutes and is tested on a linux environment. Predictions should run within 30 minutes on normal hardware and much faster on a GPU.
 
 ### 1. Clone the repository
 
