@@ -41,7 +41,7 @@ For CPU users:
 pip install .
 ```
 
-### 3. Train and explain model
+### 3. Train and explain
 
 Run the training pipeline using the provided sample data. By default, results are saved to `./output/`.
 
@@ -57,7 +57,7 @@ We provide a Jupyter notebook for post-hoc analysis and visualization:
 2. Navigate to `notebooks/vis.ipynb`
 3. Run all cells to generate plots and model explanations.
 
-### 5. \[Optional\] Save and load the model
+### 5. \[Optional\] Save and load a model
 
 To save model(s) to disk, run `pepgnn` with the `--save-model` flag.
 
