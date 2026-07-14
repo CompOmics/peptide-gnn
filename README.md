@@ -15,7 +15,7 @@ A GNN-RNN hybrid model for predicting and explaining peptide LC-RT data.
 
 > [!NOTE]
 > The steps below have only been run and tested in a linux environment.
-> Training and explaining _a_ model on _a_ dataset should take roughly 10-60 minutes, depending on dataset size and hardware.
+> Training and explaining _a_ model roughly takes a few minutes to a few hours, depending on dataset size and hardware.
 
 ### 1. Clone the repository
 
@@ -68,7 +68,7 @@ pepgnn run ./data/dia_fixed_mods.csv --epochs 100 --save-model
 The saved model(s) can then be loaded and used in a (jupyter) notebook.
 
 ```python
-from molcraft import applications
+from molgraph import applications
 from tensorflow import keras
 from peptide_gnn import util
 
