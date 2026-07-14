@@ -75,13 +75,10 @@ from peptide_gnn import util
 featurizer = util.create_featurizer()
 model = tf.keras.models.load_model('./output/models/dia_fixed_mods_model.keras')
 
-x, y = util.load_dataset('./data/dia_fixed_mods.csv')
-x, y = x[:100], y[:100] # take the first 100 to reduce run time
-x = featurizer(x)
+sequences, _ = util.load_dataset('./data/dia_fixed_mods.csv')
+graphs = featurizer(sequences[:100]) featurize the first 100 to reduce run time
 
-dataset = tf.data.Dataset.from_tensor_slices((x, y)).batch(128).prefetch(-1)
-
-predictions = model.predict(dataset)
+predictions = model.predict(graphs)
 saliencies = util.compute_saliency(model, dataset)
 ```
 
