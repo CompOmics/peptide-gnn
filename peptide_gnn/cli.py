@@ -68,10 +68,15 @@ def run(
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    input_files = input_dir.glob('*.csv')
-
     console.print("\n[white bold]Run(s) starting\n")
-    console.print(f"Input data: [magenta]{pathlib.Path(input_dir).absolute()}/[white]*.csv")
+    
+    if input_dir.is_file():
+        input_files = [input_dir]
+        console.print(f"Input data: [magenta]{pathlib.Path(input_dir).absolute()}/[white]{input_dir.name}")
+    else:
+        input_files = input_dir.glob('*.csv')
+        console.print(f"Input data: [magenta]{pathlib.Path(input_dir).absolute()}/[white]*.csv")
+        
     console.print(f"Output data: [magenta]{pathlib.Path(output_dir).absolute()}/")
 
     for file in input_files:
