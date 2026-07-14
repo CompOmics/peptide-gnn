@@ -15,7 +15,9 @@ A GNN-RNN hybrid model for predicting and explaining peptide LC-RT data.
 
 > [!NOTE]
 > The steps below have only been run and tested in a linux environment.
-> Training and explaining _a_ model roughly takes a few minutes to a few hours, depending on dataset size and hardware.
+
+> [!NOTE]
+> Training a model may take up to a few hours, depending on dataset size and hardware.
 
 ### 1. Clone the repository
 
@@ -25,7 +27,7 @@ git clone git@github.com:CompOmics/peptide-gnn.git
 cd peptide-gnn
 ```
 
-### 2. Installation
+### 2. Install
 
 We recommend using a virtual environment. Choose the installation that matches your hardware:
 
@@ -49,7 +51,7 @@ Run the training pipeline using the provided sample data. By default, results ar
 pepgnn run ./data/ --epochs 100
 ```
 
-### 4. Visualize results
+### 4. Visualize
 
 We provide a Jupyter notebook for post-hoc analysis and visualization:
 
