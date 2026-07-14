@@ -10,14 +10,17 @@ A GNN-RNN hybrid model for predicting and explaining peptide LC-RT data.
 
 ## Run it yourself
 
-> [!NOTE]
-> Results may very slightly differ from the paper due to the stochastic nature of neural nets.
+> [!IMPORTANT]
+> The results may differ from the paper due to the stochastic nature of neural nets.
 
-Installation should take less than 30 minutes and is tested on a linux environment. Predictions should run within 30 minutes on normal hardware and much faster on a GPU.
+> [!NOTE]
+> The steps below have only been run and tested in a linux environment.
+> Training and explaining _a_ model on _a_ dataset should take roughly 10-60 minutes, depending on dataset size and hardware.
 
 ### 1. Clone the repository
 
 ```bash
+
 git clone git@github.com:CompOmics/peptide-gnn.git
 cd peptide-gnn
 ```
@@ -38,7 +41,7 @@ For CPU users:
 pip install .
 ```
 
-### 3. Train and explain
+### 3. Train and explain model
 
 Run the training pipeline using the provided sample data. By default, results are saved to `./output/`.
 
@@ -54,9 +57,37 @@ We provide a Jupyter notebook for post-hoc analysis and visualization:
 2. Navigate to `notebooks/vis.ipynb`
 3. Run all cells to generate plots and model explanations.
 
+### 5. \[Optional\] Save and load the model
+
+To save model(s) to disk, run `pepgnn` with the `--save-model` flag.
+
+```bash
+pepgnn run ./data/dia_fixed_mods.csv --epochs 100 --save-model
+```
+
+The saved model(s) can then be loaded and used in a (jupyter) notebook.
+
+```python
+import molgraph
+import tensorflow as tf
+from peptide_gnn import util
+
+featurizer = util.create_featurizer()
+model = tf.keras.models.load_model('./output/models/dia_fixed_mods_model.keras')
+
+x, y = util.load_dataset('./data/dia_fixed_mods.csv')
+x, y = x[:100], y[:100] # take the first 100 to reduce run time
+x = featurizer(x)
+
+dataset = tf.data.Dataset.from_tensor_slices((x, y)).batch(128).prefetch(-1)
+
+predictions = model.predict(dataset)
+saliencies = util.compute_saliency(model, dataset)
+```
+
 ## Build it yourself
 
-If you are interested in building your own GNN-RNN hybrid model, check out [MolCraft](https://github.com/CompOmics/molcraft).
+If you are interested in building and deploying your own GNN-RNN hybrid model, check out [MolCraft](https://github.com/CompOmics/molcraft#hybrid-model-for-peptides).
 
 > [!NOTE]
 > While MolCraft provides an improved API for molecular GNN-building, the underlying building blocks differ slightly from MolGraph, which may result in different outcomes.
