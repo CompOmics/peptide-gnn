@@ -68,18 +68,19 @@ pepgnn run ./data/dia_fixed_mods.csv --epochs 100 --save-model
 The saved model(s) can then be loaded and used in a (jupyter) notebook.
 
 ```python
-import molgraph
-import tensorflow as tf
+from molcraft import applications
+from tensorflow import keras
 from peptide_gnn import util
 
 featurizer = util.create_featurizer()
-model = tf.keras.models.load_model('./output/models/dia_fixed_mods_model.keras')
+model = keras.models.load_model('./output/models/dia_fixed_mods_model.keras')
+saliency = applications.proteomics.PeptideSaliency(model)
 
 sequences, _ = util.load_dataset('./data/dia_fixed_mods.csv')
 graphs = featurizer(sequences[:100]) # featurize the first 100 to reduce run time
 
 predictions = model.predict(graphs)
-saliencies = util.compute_saliency(model, dataset)
+saliencies = saliency(graphs.separate()).numpy().tolist()
 ```
 
 ## Build it yourself
