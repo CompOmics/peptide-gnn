@@ -48,9 +48,9 @@ def cli() -> None:
 @click.option("--end-learning-rate", default=1e-6, type=float)
 @click.option("--epochs", default=100, type=int)
 @click.option("--batch-size",  default=16, type=int)
-@click.option("--reshuffle-each-epoch",  default=False, type=bool)
-@click.option("--save-model",  default=False, type=bool)
-@click.option("--random-seed",  default=42, type=int)
+@click.option("--reshuffle-each-epoch", is_flag=True, default=False, type=bool)
+@click.option("--save-model", is_flag=True, default=False, type=bool)
+@click.option("--random-seed", default=42, type=int)
 def run(
     input_dir, 
     output_dir, 
